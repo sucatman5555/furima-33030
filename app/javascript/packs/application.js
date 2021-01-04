@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// turbolinksが読み込まれないように編集
+// require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
