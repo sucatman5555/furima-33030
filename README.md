@@ -17,7 +17,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchase_list
+- has_many :purchase_lists
 
 
 
@@ -25,17 +25,15 @@
 
 | Column                  | Type                 | Options                        |
 | ----------------------- | -------------------- | ------------------------------ |
-| image                   | ActiveStorageで実装   |                                |
 | goods_name              | string               | null: false                    |
 | goods_explanation       | text                 | null: false                    |
 | goods_detail_category_id| integer              | null: false                    |
 | goods_detail_status_id  | integer              | null: false                    |
 | delivery_method_id      | integer              | null: false                    |
 | prefecture_id           | integer              | null: false                    |
-| delivery_time           | string               | null: false                    |
+| delivery_time_id        | integer              | null: false                    |
 | selling_price           | integer              | null: false                    |
-| buyer_id                | references           | foreign_key: true              |
-| user_id                 | references           | null: false, foreign_key: true |
+| user                    | references           | null: false, foreign_key: true |
 
 ### Association
 
@@ -44,12 +42,12 @@
 
 
 
-## purchase_list テーブル
+## purchase_lists テーブル
 
 | Column               | Type                 | Options                        |
 | -------------------- | -------------------- | ------------------------------ |
-| user_id              | references           | null: false, foreign_key: true |
-| item_id              | references           | null: false, foreign_key: true |
+| user                 | references           | null: false, foreign_key: true |
+| item                 | references           | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -68,7 +66,7 @@
 | addresses       | string      | null: false                    |
 | building        | string      |                                |
 | phone_number    | string      | null: false                    |
-| purchase_list_id| references  | null: false, foreign_key: true |
+| purchase_list   | references  | null: false, foreign_key: true |
 
 ### Association
 
