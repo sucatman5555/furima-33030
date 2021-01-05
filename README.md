@@ -11,14 +11,14 @@
 | first_name_kanji| string | null: false |
 | last_name_kana  | string | null: false |
 | first_name_kana | string | null: false |
-| user_birth_year | integer| null: false |
-| user_birth_month| integer| null: false |
-| user_birth_day  | integer| null: false |
+| user_birth_date | date   | null: false |
 
 
 ### Association
 
 - has_many :items
+- has_many :purchase_list
+- has_one :addresses
 
 
 ## items テーブル
@@ -34,32 +34,29 @@
 | delivery_location    | string               | null: false                    |
 | delivery_time        | string               | null: false                    |
 | selling_price        | integer              | null: false                    |
-| user                 | references           | null: false, foreign_key: true |
+| buyer_id             | references           | foreign_key: true              |
+| user_id              | references           | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one :purchase
+- has_many :purchase_list
 
 
-## purchases テーブル
+
+## addresses テーブル
 
 | Column         | Type        | Options                        |
 | -------------- | ----------- | ------------------------------ |
-| card_number    | string      | null: false                    |
-| card_exp_month | integer     | null: false                    |
-| card_exp_year  | integer     | null: false                    |
-| card_cvc       | integer     | null: false                    |
 | postal_code    | string      | null: false                    |
-| prefecture     | string      | null: false                    |
+| prefecture     | integer     | null: false                    |
 | city           | string      | null: false                    |
 | addresses      | string      | null: false                    |
 | building       | string      | null: false                    |
 | phone_number   | string      | null: false                    |
-| buyer          | integer     | null: false                    |
-| item           | references  | null: false, foreign_key: true |
+| user_id        | references  | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :item
+- belongs_to :user
 
