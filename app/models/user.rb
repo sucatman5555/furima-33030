@@ -6,7 +6,7 @@ class User < ApplicationRecord
   # バリデーションを設定
   # 英字と数字の両方を含めて設定
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'は6文字以上、英字と数字の両方を含めてください' }
-  validates :nickname, presence: true
+
   # ユーザー本名は、全角（漢字・ひらがな・カタカナ）での入力が必須
   with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'に全角文字（漢字・ひらがな・カタカナ）を使用してください' } do
     validates :last_name_kanji
@@ -17,6 +17,11 @@ class User < ApplicationRecord
     validates :last_name_kana
     validates :first_name_kana
   end
-  validates :user_birth_date, presence: true
+  # 4.ユーザー管理機能 #RV01
+  with_options presence: true do
+    validates :nickname
+    validates :user_birth_date
+  end
+  # //4.ユーザー管理機能 #RV01
   # //バリデーションを設定
 end
