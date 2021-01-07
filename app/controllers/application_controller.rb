@@ -10,14 +10,11 @@ class ApplicationController < ActionController::Base
   private
 
   # application_controller.rb ファイルにuserの追加カラムの保存を可能とする記述02
+  # 4.ユーザー管理機能 #RV04
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name_kanji])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name_kanji])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name_kana])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name_kana])
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:user_birth_date])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :last_name_kanji, :first_name_kanji, :last_name_kana, :first_name_kana,:user_birth_date])
   end
+  # //4.ユーザー管理機能 #RV04
 
   # //application_controller.rb ファイルにuserの追加カラムの保存を可能とする記述02
   # Basic認証の実装02
