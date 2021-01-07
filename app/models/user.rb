@@ -10,7 +10,10 @@ class User < ApplicationRecord
   # ユーザー本名は、全角（漢字・ひらがな・カタカナ）での入力が必須
   # 4.ユーザー管理機能 #RV02
   # with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: 'に全角文字（漢字・ひらがな・カタカナ）を使用してください' } do
-  with_options presence: true, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/, message: 'に全角文字（漢字・ひらがな・カタカナ）を使用してください' } do
+  # with_options presence: true,format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/i, message: 'に全角文字（漢字・ひらがな・カタカナ）を使用してください' } do
+  # 4.ユーザー管理機能 #RV02 edit
+  # 半角文字も判定されてしまったため、バリデーション処理を修正
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: 'に全角文字（漢字・ひらがな・カタカナ）を使用してください' } do
     validates :last_name_kanji
     validates :first_name_kanji
   end
