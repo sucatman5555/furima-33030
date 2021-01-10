@@ -7,7 +7,7 @@ FactoryBot.define do
     delivery_method_id       { rand(2..3) }
     prefecture_id            { rand(2..48) }
     delivery_time_id         { rand(2..4) }
-    selling_price            { rand(300..9999999) }
+    selling_price            { rand(300..9_999_999) }
     # user情報の紐付けが必要。
     association :user
     # テストコード用に画像をローカル環境で準備

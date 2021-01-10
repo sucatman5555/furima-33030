@@ -4,9 +4,7 @@ class ItemsController < ApplicationController
 
   def new
     # ログアウト状態のユーザーは、商品出品ページへ遷移しようとすると、ログインページへ遷移する
-    unless user_signed_in?
-      redirect_to root_path
-    end
+    redirect_to root_path unless user_signed_in?
     @item = Item.new
   end
 
@@ -30,8 +28,8 @@ class ItemsController < ApplicationController
     # itemsコントローラーのprivateメソッドにストロングパラメーターをセットし、
     # 特定の値のみを受け付けるようにした。且つ、user_idもmerge
     params.require(:item)
-          .permit( :goods_name, :goods_explanation, :goods_detail_category_id, :goods_detail_status_id,
-                   :delivery_method_id, :prefecture_id, :delivery_time_id, :selling_price, :image)
+          .permit(:goods_name, :goods_explanation, :goods_detail_category_id, :goods_detail_status_id,
+                  :delivery_method_id, :prefecture_id, :delivery_time_id, :selling_price, :image)
           .merge(user_id: current_user.id)
   end
 end
