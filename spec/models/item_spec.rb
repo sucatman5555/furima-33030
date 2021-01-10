@@ -117,6 +117,18 @@ RSpec.describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include('Selling price is not a number')
       end
+      # 5.商品出品機能 #Rv01
+      it '英数混合では登録できないこと' do
+        @item.selling_price = '300a'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Selling price is not a number')
+      end
+      it '半角英語では登録できないこと' do
+        @item.selling_price = 'abcd'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Selling price is not a number')
+      end
+      # //5.商品出品機能 #Rv01
     end
   end
 end
