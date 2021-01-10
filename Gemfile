@@ -63,3 +63,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 # デバック用
 gem 'pry-rails'
+
+# Active Storage image_processingについてはバージョンの指定をする
+gem 'mini_magick'
+gem 'image_processing', '~> 1.2'
+
+# ActiveHashを導入
+gem 'active_hash'
