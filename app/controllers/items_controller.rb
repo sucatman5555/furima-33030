@@ -1,10 +1,13 @@
 class ItemsController < ApplicationController
+  # 5.商品出品機能 #Rv02
+  # ログアウト状態のユーザーは、商品出品ページへ遷移しようとすると、ログインページへ遷移する
+  before_action :authenticate_user!, except: [:index, :show]
+  # //5.商品出品機能 #Rv02
+
   def index
   end
 
   def new
-    # ログアウト状態のユーザーは、商品出品ページへ遷移しようとすると、ログインページへ遷移する
-    redirect_to root_path unless user_signed_in?
     @item = Item.new
   end
 
