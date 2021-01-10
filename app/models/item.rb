@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   # バリデーションを設定
   with_options presence: true do
+    validates :image
     validates :goods_name
     validates :goods_explanation
     validates :goods_detail_category_id, numericality: { other_than: 1 }
@@ -8,7 +9,8 @@ class Item < ApplicationRecord
     validates :delivery_method_id, numericality: { other_than: 1 }
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :delivery_time_id, numericality: { other_than: 1 }
-    validates :selling_price
+    # 半角数字かつ入力範囲が、¥300~¥9,999,999の間であること
+    validates :selling_price,numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
   end
   # //バリデーションを設定
   # アソシエーションを記述
