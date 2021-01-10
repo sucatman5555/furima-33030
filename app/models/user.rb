@@ -26,4 +26,7 @@ class User < ApplicationRecord
   end
   # //4.ユーザー管理機能 #RV05
   # //バリデーションを設定
+  # アソシエーションを記述
+  has_many :items
+  # //アソシエーションを記述
 end
