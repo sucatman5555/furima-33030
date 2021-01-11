@@ -9,6 +9,10 @@ class ItemsController < ApplicationController
   # URLを直接入力して出品していない商品の商品情報編集ページへ遷移しようとすると、トップページに遷移する
   before_action :move_to_index, only: [:edit]
 
+  # 8.商品情報編集機能 #RV01-01
+  # @item = Item.find(params[:id])は繰り返し使われるのでset_itemで処理をまとめる
+  before_action :set_item, only: [:show, :edit, :update]
+
   def index
     # N+1問題対策 Item.includes(:user)
     # 最新のものから並べる.order("created_at DESC")
@@ -31,15 +35,15 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    # 事前にset_itemを呼ぶ（8.商品情報編集機能 #RV01-02）
   end
 
   def edit
-    @item = Item.find(params[:id])
+    # 事前にset_itemを呼ぶ（8.商品情報編集機能 #RV01-02）
   end
 
   def update
-    @item = Item.find(params[:id])
+    # 事前にset_itemを呼ぶ（8.商品情報編集機能 #RV01-02）
     if @item.update(item_params)
       # 詳細画面に遷移
       redirect_to item_path(@item.id)
@@ -66,4 +70,10 @@ class ItemsController < ApplicationController
     redirect_to action: :index unless user_signed_in? && current_user.id == item.user_id
   end
   # //アクセス制御1-2
+
+  # 8.商品情報編集機能 #RV01-02
+  def set_item
+    @item = Item.find(params[:id])
+  end
+  # //8.商品情報編集機能 #RV01-02
 end
