@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # インデックスを設定
   root to: "items#index"
   # itemのルーティング設定
-  resources :items, only: [:new, :create, :show, :edit, :update]
+  # 9.商品削除機能 #RV02
+  # 全てのアクションが揃ったのでonlyは削除
+  resources :items
   
 end
