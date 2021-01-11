@@ -4,6 +4,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # //5.商品出品機能 #Rv02
 
+  # アクセス制御1-1（続きはprivate以降）
+  # ログイン状態の出品者以外のユーザーは、
+  # URLを直接入力して出品していない商品の商品情報編集ページへ遷移しようとすると、トップページに遷移する
+  before_action :move_to_index, only: [:edit]
+
   def index
     # N+1問題対策 Item.includes(:user)
     # 最新のものから並べる.order("created_at DESC")
@@ -29,6 +34,21 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      # 詳細画面に遷移
+      redirect_to item_path(@item.id)
+    else
+      # 空欄があると編集画面にとどまる。
+      render :edit
+    end
+  end
+
   private
 
   def item_params
@@ -39,4 +59,13 @@ class ItemsController < ApplicationController
                   :delivery_method_id, :prefecture_id, :delivery_time_id, :selling_price, :image)
           .merge(user_id: current_user.id)
   end
+
+  # アクセス制御1-2
+  def move_to_index
+    item = Item.find(params[:id])
+    unless user_signed_in? && current_user.id == item.user_id
+      redirect_to action: :index
+    end
+  end
+  # //アクセス制御1-2
 end
