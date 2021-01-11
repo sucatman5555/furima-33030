@@ -5,6 +5,9 @@ class ItemsController < ApplicationController
   # //5.商品出品機能 #Rv02
 
   def index
+    # N+1問題対策 Item.includes(:user)
+    # 最新のものから並べる.order("created_at DESC")
+    @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
