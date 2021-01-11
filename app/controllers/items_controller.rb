@@ -7,7 +7,10 @@ class ItemsController < ApplicationController
   # アクセス制御1-1（続きはprivate以降）
   # ログイン状態の出品者以外のユーザーは、
   # URLを直接入力して出品していない商品の商品情報編集ページへ遷移しようとすると、トップページに遷移する
-  before_action :move_to_index, only: [:edit]
+  # 9.商品削除機能 #RV01 (:destroy)の追記
+  # viewのみの条件分岐のみだと、検証ツールを用いて削除のアクションを動かせてしまうため、
+  # 悪意のあるユーザーに対応できないため、コントローラーでも条件分岐の処理を用意する。
+  before_action :move_to_index, only: [:edit, :destroy]
 
   # 8.商品情報編集機能 #RV01-01
   # @item = Item.find(params[:id])は繰り返し使われるのでset_itemで処理をまとめる
