@@ -4,6 +4,10 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # //5.商品出品機能 #Rv02
 
+  # 8.商品情報編集機能 #RV01-01
+  # @item = Item.find(params[:id])は繰り返し使われるのでset_itemで処理をまとめる
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+
   # アクセス制御1-1（続きはprivate以降）
   # ログイン状態の出品者以外のユーザーは、
   # URLを直接入力して出品していない商品の商品情報編集ページへ遷移しようとすると、トップページに遷移する
@@ -12,9 +16,6 @@ class ItemsController < ApplicationController
   # 悪意のあるユーザーに対応できないため、コントローラーでも条件分岐の処理を用意する。
   before_action :move_to_index, only: [:edit, :destroy]
 
-  # 8.商品情報編集機能 #RV01-01
-  # @item = Item.find(params[:id])は繰り返し使われるのでset_itemで処理をまとめる
-  before_action :set_item, only: [:show, :edit, :update]
 
   def index
     # N+1問題対策 Item.includes(:user)
@@ -57,8 +58,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    # 9.商品削除機能 #RV03（リファクタリング）
+    @item.destroy
     redirect_to root_path
   end
 
@@ -75,8 +76,7 @@ class ItemsController < ApplicationController
 
   # アクセス制御1-2
   def move_to_index
-    item = Item.find(params[:id])
-    redirect_to action: :index unless user_signed_in? && current_user.id == item.user_id
+    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user_id
   end
   # //アクセス制御1-2
 
