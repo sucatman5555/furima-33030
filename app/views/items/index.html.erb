@@ -158,10 +158,10 @@
           <% end %>
           </li>
         <% end %>
-      <% end %>
-
       <%# 商品がない場合は以下のダミー商品が表示される %>
-      <% if @items[0] == nil %>
+      <%# if @items[0] == nil %>
+      <%# 条件が２通りなのでelseに変更した %>
+      <% else %>
         <li class='list'>
           <%= link_to '#' do %>
           <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -178,7 +178,7 @@
             </div>
           </div>
           <% end %>
-      </li>
+        </li>
       <% end %>
     </ul>
   </div>
