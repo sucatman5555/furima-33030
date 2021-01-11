@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   # インデックスを設定
   root to: "items#index"
   # itemのルーティング設定
-  resources :items, only: [:new, :create, :show, :edit, :update]
+  resources :items, only: [:new, :create, :show, :edit, :update, :destroy]
   
 end
