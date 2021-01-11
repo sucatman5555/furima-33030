@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
   def index
     # N+1問題対策 Item.includes(:user)
     # 最新のものから並べる.order("created_at DESC")
-    @items = Item.includes(:user).order("created_at DESC")
+    @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
