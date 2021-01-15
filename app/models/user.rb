@@ -28,5 +28,7 @@ class User < ApplicationRecord
   # //バリデーションを設定
   # アソシエーションを記述
   has_many :items
+  # 10.商品購入機能
+  has_many :purchase_lists
   # //アソシエーションを記述
 end

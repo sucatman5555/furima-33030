@@ -79,6 +79,10 @@ class ItemsController < ApplicationController
     # 9.商品削除機能 #RV04
     # before_actionでauthenticate_user!を使用しているので、user_signed_in? &&の記述は不要
     redirect_to action: :index unless current_user.id == @item.user_id
+    # 購入済みの商品は編集/削除不可
+    if @item.purchase_list.present?
+      redirect_to root_path
+    end
   end
   # //アクセス制御1-2
 

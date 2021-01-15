@@ -70,3 +70,6 @@ gem 'image_processing', '~> 1.2'
 
 # ActiveHashを導入
 gem 'active_hash'
+
+# Ruby（Ruby on Rails）のサーバーサイドから、決済処理を行うときに必要となるGem
+gem 'payjp'

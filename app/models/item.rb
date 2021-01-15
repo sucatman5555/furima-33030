@@ -20,6 +20,8 @@ class Item < ApplicationRecord
   # Active Storage
   has_one_attached :image
 
+  has_one :purchase_list
+
   # カテゴリーの選択
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :goods_detail_category
