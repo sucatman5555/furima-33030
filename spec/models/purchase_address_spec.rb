@@ -17,6 +17,20 @@ RSpec.describe PurchaseAddress, type: :model do
     end
   end
   describe '商品が購入不可能な時（異常系）' do
+    # 10.商品購入機能 #RV05
+    context 'referencesのNULLチェック' do
+      it 'user_idが空の場合、購入処理に失敗すること' do
+        @purchase_address.user_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空の場合、購入処理に失敗すること' do
+        @purchase_address.item_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+      end
+    end
+    # //10.商品購入機能 #RV05
     context 'クレジットカード情報入力' do
       it 'トークンが空の場合、購入処理に失敗すること' do
         @purchase_address.token = nil
