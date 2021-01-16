@@ -12,6 +12,10 @@ class PurchaseAddress
     validates :phone_number, length: { maximum: 11 }, format: { with: /\A[0-9]+\z/, message: '半角数字で記入してください。' }
     # tokenが空では保存できないというバリデーションを追加
     validates :token
+    # 10.商品購入機能 #RV01
+    validates :user_id
+    validates :item_id
+    # //10.商品購入機能 #RV01
   end
 
   def save
