@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   # 全てのアクションが揃ったのでonlyは削除
   resources :items do
     # 10.商品購入ページ作成
-    resources :orders, only: [:index, :new, :create]
+    resources :orders, only: [:index, :create]
   end
 end

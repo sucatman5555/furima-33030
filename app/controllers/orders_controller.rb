@@ -13,17 +13,13 @@ class OrdersController < ApplicationController
     @purchase_address = PurchaseAddress.new # 「PurchaseAddress」に編集
   end
 
-  def new
-    # 購入完了画面
-  end
-
   def create
     @purchase_address = PurchaseAddress.new(purchase_address_params) # 「PurchaseAddress」に編集
     if @purchase_address.valid?
       pay_item
       @purchase_address.save
+      # 10.商品購入機能 #RV03
       # 購入完了画面へ遷移
-      redirect_to action: :new
     else
       # エラーメッセージを保持するためにrenderで定義する
       # エラー後の再表示にて@itemが空になってしまうので事前にset_itemの呼び出しが必要
