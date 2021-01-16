@@ -1,7 +1,11 @@
 FactoryBot.define do
   factory :user do
-    nickname              { 'たらこtarako1' }
-    email                 { 'tarako@gmail.com' }
+    # 10.商品購入機能 #RV06
+    nickname              { Faker::Name.initials }
+    # purchase_address_specのテストにてitemもcreateするためメールの重複でエラーが
+    # 発生してしまうため、ランダム生成に変更
+    email                 { Faker::Internet.free_email }
+    # //10.商品購入機能 #RV06
     password              { '12345a' }
     # 4.ユーザー管理機能 #RV07
     password_confirmation { '12345a' }

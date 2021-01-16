@@ -3,6 +3,15 @@ require 'rails_helper'
 RSpec.describe PurchaseAddress, type: :model do
   before do
     @purchase_address = FactoryBot.build(:purchase_address)
+    # 10.商品購入機能 #RV06
+    @item = FactoryBot.create(:item)
+    # createをすることでDBに一時的にデータを格納するため、
+    # 連続createしてしまうとエラーが発生する。そのため待ち時間を設置
+    sleep(1)
+    @user = FactoryBot.create(:user)
+    @purchase_address.item_id = @item.id
+    @purchase_address.user_id = @user.id
+    # //10.商品購入機能 #RV06
   end
 
   describe '商品が購入可能な時（正常系）' do
