@@ -16,7 +16,6 @@ class ItemsController < ApplicationController
   # 悪意のあるユーザーに対応できないため、コントローラーでも条件分岐の処理を用意する。
   before_action :move_to_index, only: [:edit, :destroy]
 
-
   def index
     # N+1問題対策 Item.includes(:user)
     # 最新のものから並べる.order("created_at DESC")
@@ -79,6 +78,8 @@ class ItemsController < ApplicationController
     # 9.商品削除機能 #RV04
     # before_actionでauthenticate_user!を使用しているので、user_signed_in? &&の記述は不要
     redirect_to action: :index unless current_user.id == @item.user_id
+    # 購入済みの商品は編集/削除不可
+    redirect_to root_path if @item.purchase_list.present?
   end
   # //アクセス制御1-2
 
