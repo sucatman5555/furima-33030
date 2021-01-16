@@ -55,9 +55,7 @@ class OrdersController < ApplicationController
   def move_to_index
     # 10.商品購入機能 #RV07
     # カレントIDとアイテムIDが一致または売れた商品の購入ページにはいけない
-    if (current_user.id == @item.user_id) || @item.purchase_list.present?
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id == @item.user_id || @item.purchase_list.present?
     # //10.商品購入機能 #RV07
   end
   # //アクセス制御
