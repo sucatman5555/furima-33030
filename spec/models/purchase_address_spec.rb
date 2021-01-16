@@ -78,6 +78,13 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
+      # 10.商品購入機能 #RV04
+      it '電話番号が英数混合の場合は購入に失敗すること' do
+        @purchase_address.phone_number = '1234567890a'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include('Phone number 半角数字で記入してください。')
+      end
+      # //10.商品購入機能 #RV04
     end
   end
 end
