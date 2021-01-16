@@ -31,7 +31,8 @@
         <p class='or-text'>or</p>
         <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' , data: { confirm: '削除しますか？' } %>
       <% end %>
-    <% else %>
+    <%# 10.商品購入機能 #RV02 %>
+    <% elsif user_signed_in? %>
       <%# 商品が売れていない場合に表示 %>
       <% unless @item.purchase_list.present? %>
         <%= link_to '購入画面に進む', item_orders_path(@item.id) ,class:"item-red-btn"%>
