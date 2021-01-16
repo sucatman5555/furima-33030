@@ -3,7 +3,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   # @item = Item.find(params[:item_id])は繰り返し使われるのでset_itemで処理をまとめる
-  before_action :set_item, only: [:index, :create, :pay_item, :move_to_index]
+  # 10.商品購入機能 #RV07
+  before_action :set_item, only: [:index, :create]
 
   # ログイン状態の出品者が、URLを直接入力して自身の出品した商品購入ページに遷移しようとすると、
   # トップページに遷移する
@@ -38,8 +39,6 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
-    # 売れた商品の購入ページにはいけない
-    redirect_to root_path if @item.purchase_list.present?
   end
 
   def pay_item
@@ -54,7 +53,12 @@ class OrdersController < ApplicationController
 
   # アクセス制御
   def move_to_index
-    redirect_to root_path if current_user.id == @item.user_id
+    # 10.商品購入機能 #RV07
+    # カレントIDとアイテムIDが一致または売れた商品の購入ページにはいけない
+    if (current_user.id == @item.user_id) || @item.purchase_list.present?
+      redirect_to root_path
+    end
+    # //10.商品購入機能 #RV07
   end
   # //アクセス制御
 end
