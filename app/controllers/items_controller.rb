@@ -75,11 +75,12 @@ class ItemsController < ApplicationController
 
   # アクセス制御1-2
   def move_to_index
+    # フリマアプリ挙動確認 #RV01
+    # 購入済みの商品は編集/削除不可
+    redirect_to root_path and return if @item.purchase_list.present?
     # 9.商品削除機能 #RV04
     # before_actionでauthenticate_user!を使用しているので、user_signed_in? &&の記述は不要
     redirect_to action: :index unless current_user.id == @item.user_id
-    # 購入済みの商品は編集/削除不可
-    redirect_to root_path if @item.purchase_list.present?
   end
   # //アクセス制御1-2
 
