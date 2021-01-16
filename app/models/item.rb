@@ -2,8 +2,8 @@ class Item < ApplicationRecord
   # バリデーションを設定
   with_options presence: true do
     validates :image
-    validates :goods_name
-    validates :goods_explanation
+    validates :goods_name, length: { maximum: 40 }
+    validates :goods_explanation, length: { maximum: 1000 }
     validates :goods_detail_category_id, numericality: { other_than: 1 }
     validates :goods_detail_status_id, numericality: { other_than: 1 }
     validates :delivery_method_id, numericality: { other_than: 1 }
