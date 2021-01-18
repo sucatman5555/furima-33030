@@ -73,3 +73,6 @@ gem 'active_hash'
 
 # Ruby（Ruby on Rails）のサーバーサイドから、決済処理を行うときに必要となるGem
 gem 'payjp'
+
+# S3を使用するために必要なGemfileを導入
+gem "aws-sdk-s3", require: false
