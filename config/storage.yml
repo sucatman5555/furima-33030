@@ -9,8 +9,6 @@ local:
 # S3で使用するバケット名とリージョン名を記述
 amazon:
   service: S3
-  # Aws::S3::Errors::PermanentRedirect の対応をした
-  # エンドポイントはバケットの概要のリビジョンをみて”ap-southeast-1”に変更
   region: ap-southeast-1
   bucket: furima33030
   access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>

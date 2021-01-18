@@ -29,7 +29,7 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  # config.active_storage.service = :local
+ 
   # S3に保存されるように設定を変更
   config.active_storage.service = :amazon
 
