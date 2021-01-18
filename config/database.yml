@@ -51,5 +51,9 @@ test:
 production:
   <<: *default
   database: furima_33030_production
-  username: furima_33030
-  password: <%= ENV['FURIMA_33030_DATABASE_PASSWORD'] %>
+  # username: furima_33030
+  # password: <%= ENV['FURIMA_33030_DATABASE_PASSWORD'] %>
+  # unicorn_railsコマンド設定
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
