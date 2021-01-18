@@ -76,3 +76,8 @@ gem 'payjp'
 
 # S3を使用するために必要なGemfileを導入
 gem "aws-sdk-s3", require: false
+
+# Unicornの設定
+group :production do
+  gem 'unicorn', '5.4.1'
+end
